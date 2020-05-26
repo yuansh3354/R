@@ -1,6 +1,8 @@
 ### 通路富集主函数
 ### 输入函数包之后就可以使用主函数
 ##### 其中go是功能富集,kegg是通路富集
+
+```
 if(T){
   logFC_t=1
   top$g= 0
@@ -53,13 +55,14 @@ if(T){
   ggsave(g_kegg,filename = 'kegg_up_down.png')
 }#kegg
 }
+```
 
+#### 这个是函数包
+###### kegg_and_go_up_and_down.R
+###### KEGG pathway analysis
+###### 做KEGG数据集超几何分布检验分析，重点在结果的可视化及生物学意义的理解。
 
-# 这个是函数包
-# kegg_and_go_up_and_down.R
-## KEGG pathway analysis
-### 做KEGG数据集超几何分布检验分析，重点在结果的可视化及生物学意义的理解。
-
+```
 run_kegg <- function(gene_up,gene_down,geneList=F,pro='test'){
   gene_up=unique(gene_up)
   gene_down=unique(gene_down)
@@ -205,3 +208,4 @@ kegg_plot <- function(up_kegg,down_kegg){
     coord_flip() + theme_bw()+theme(plot.title = element_text(hjust = 0.5))+
     ggtitle("Pathway Enrichment") 
 }
+```
