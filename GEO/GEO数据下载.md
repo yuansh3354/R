@@ -1,6 +1,6 @@
 ##### 1. 设置镜像
 
-```
+```R
 if(T){
   options()$repos 
   options()$BioC_mirror
@@ -14,7 +14,7 @@ if(T){
 
 ##### 2. 导入包
 
-```
+```R
 if(T){
   library(limma)
   library(GEOquery)
@@ -38,7 +38,7 @@ if(T){
 
 ### 下载不需要归一化的数据
 
-```
+```R
 file = 'GSE19188' # 要下载的数据
 setwd('/Volumes/Lexar/ZG/GSE19188分析结果')
 if(T){
@@ -65,7 +65,7 @@ df_expr = read.csv(paste(file,'.csv',sep = ''),header = T, row.names = 1)
 
 ### 如果需要归一化处理,则使用这个代码
 
-```
+```R
 file = 'GSE31210' # GSE50081 GSE31210
 if(T){
   gset <- getGEO(file, destdir=".",
