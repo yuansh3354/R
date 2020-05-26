@@ -1,14 +1,3 @@
-### ---
-### Title: "Untitled"
-### Create: "Yuansh"
-### Date: "5/01/2020"
-### Email: yuansh3354@163.com
-### output: html_document
-### ---
-
-
-### step0 准备
-
 ##### 1. 设置镜像
 
 ```
