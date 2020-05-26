@@ -1,0 +1,66 @@
+```R
+rm(list = ls())  ####  魔幻操作，一键清空~
+options(stringsAsFactors = F)#在读入数据时，遇到字符串之后，不将其转换为factors，仍然保留为字符串格式
+ #KM生存曲线
+#http://www.sthda.com/english/wiki/survival-analysis-basics
+#这里很详细的教程
+#载入数据
+load("step4-Multivariate Cox regression analysis.Rdata")
+ #载入R包
+install.packages("stringr")
+install.packages("survival") #用于生存分析
+install.packages("survminer") #用于画图
+ #1.准备KM的Input数据
+#整理成含有time,event,risk_group(高低风险组)的数据
+library(stringr)
+str(BRCA_clinicaldata)
+dim(BRCA_clinicaldata)
+class(names(RiskScore))
+#检查一下样本名
+all(substr(names(RiskScore),1,12)==substr(rownames(BRCA_clinicaldata),1,12))
+all(substr(names(risk_group),1,12)==substr(rownames(BRCA_clinicaldata),1,12))
+KM.input<-cbind(BRCA_clinicaldata[,c("event","time_year")],RiskScore,risk_group) #用到cbind()函数
+```
+
+###### 生存分析
+```R
+#3.进行KM生存分析
+library(survival)
+library(survminer)
+#3.1计算生存曲线：survfit()
+str(KM.input)
+fit<-survfit(Surv(time_year,event) ~ risk_group, data=KM.input)
+###  ~risk_group 表示通过高低风险组来计算患者的生存率 如果是按照性别那就 ~sex（sex是你的变量名）
+ print(fit) #查看一下结果
+summary(fit) #展示更详细的结果
+summary(fit)$table #这是以table形式展示
+ #3.2进行可视化  我使用的是ggsurvplot()这个函数 [in Survminer R package]
+KMsurvival_plot<-ggsurvplot(fit,pval = TRUE, #show p-value of log-rank test，显示log-rank分析得到的P值
+           conf.int = TRUE, #添加置信区间
+           conf.int.style = "step",  ###  customize style of confidence intervals,改变置信区间的样子
+           risk.table = "abs_pct",  ###  absolute number and percentage at risk，这里以n(%)的形式展示risk table
+           risk.table.y.text.col = T,###  colour risk table text annotations.
+           risk.table.y.text = FALSE,###  show bars instead of names in text annotations in legend of risk table.不显示注释名字
+           xlab = "Time in years",   ###  customize X axis label.自定义x的标签为time in years
+           surv.median.line = "hv", #添加中位生存时间的线
+           ncensor.plot = FALSE, #我这里不显示删失的图，TRUE就显示
+           legend.labs =
+             c("high risk", "low risk"),    ###  对legend的标签重新命名
+           palette = c("#E7B800", "#2E9FDF"), ###  自定义颜色
+           ggtheme = theme_light()#绘图主题
+               )
+KMsurvival_plot
+ #3.3 生存曲线的总结，Kaplan-Meier life table: summary of survival curves
+#这个更为详细
+KMres.sum  <- surv_summary(fit)
+head(KMres.sum)
+attr(KMres.sum , "table") #获取表格形式
+ #3.3查看统计学结果  Log-Rank test comparing survival curves: survdiff()
+#The log-rank test is the most widely used method of comparing two or more survival curves.
+#前面我们在画图中也可以直接看到P值
+surv_diff <- survdiff(Surv(time_year, event) ~ risk_group, data = KM.input)
+surv_diff
+#p-values<0.05 说明高低风险组的生存概率有显著差异
+ #保存数据
+save(KM.input,KMres.sum,BRCA_clinicaldata,KMsurvival_plot,step.multi_COX,Up_DEM_expr,risk_group,RiskScore,file="step6_Kaplan-Meier Survival Analysis.Rdata")
+```
