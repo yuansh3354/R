@@ -2,7 +2,7 @@
 ### 输入函数包之后就可以使用主函数
 ##### 其中go是功能富集,kegg是通路富集
 
-```
+```R
 if(T){
   logFC_t=1
   top$g= 0
@@ -62,7 +62,7 @@ if(T){
 ###### KEGG pathway analysis
 ###### 做KEGG数据集超几何分布检验分析，重点在结果的可视化及生物学意义的理解。
 
-```
+```R
 run_kegg <- function(gene_up,gene_down,geneList=F,pro='test'){
   gene_up=unique(gene_up)
   gene_down=unique(gene_down)
