@@ -10,6 +10,8 @@
 ### step0 准备
 
 ##### 1. 设置镜像
+
+```
 if(T){
   options()$repos 
   options()$BioC_mirror
@@ -19,8 +21,11 @@ if(T){
   #BiocManager::install('randomForestSRC')
   #install.packages('包')
 }
+```
 
 ##### 2. 导入包
+
+```
 if(T){
   library(limma)
   library(GEOquery)
@@ -40,8 +45,11 @@ if(T){
   library(Hmisc)
   library(clusterProfiler)
 }
+```
 
+### 下载不需要归一化的数据
 
+```
 file = 'GSE19188' # 要下载的数据
 setwd('/Volumes/Lexar/ZG/GSE19188分析结果')
 if(T){
@@ -64,10 +72,11 @@ if(T){
 paste(file,'_clinic.csv',sep = '')
 pd = read.csv(paste(file,'_clinic.csv',sep = ''),header = T, row.names = 1)
 df_expr = read.csv(paste(file,'.csv',sep = ''),header = T, row.names = 1)
-
+```
 
 ### 如果需要归一化处理,则使用这个代码
-# 验证集2
+
+```
 file = 'GSE31210' # GSE50081 GSE31210
 if(T){
   gset <- getGEO(file, destdir=".",
@@ -94,3 +103,4 @@ if(T){
 paste(file,'_clinic.csv',sep = '')
 pd = read.csv(paste(file,'_clinic.csv',sep = ''),header = T, row.names = 1)
 df_expr = read.csv(paste(file,'.csv',sep = ''),header = T, row.names = 1)
+```
