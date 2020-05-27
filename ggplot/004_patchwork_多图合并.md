@@ -1,4 +1,6 @@
-##### 导入R包
+> 参考使用手册https://patchwork.data-imaginist.com/index.html
+
+### 导入R包
 
 ```R
 
@@ -7,7 +9,7 @@ library(patchwork)
 
 ```
 
-##### 构建基本图形
+### 构建基本图形
 
 ```R
 
@@ -29,7 +31,7 @@ p4 <- ggplot(mtcars) +
 
 ```
 
-##### 组合
+### 组合
 
 ```R
 
@@ -50,4 +52,13 @@ p1 | p2
 p1 + p2 + p3 + 
   plot_annotation(tag_levels = 'A')
 
+```
+
+### 添加表格或者文字
+
+```R
+p1 + grid::textGrob('Some really important text')
+p1 + gridExtra::tableGrob(mtcars[1:10, c('mpg', 'disp')])
+patchwork + plot_annotation(tag_levels = c('A', '1'), tag_prefix = 'Fig. ',
+                            tag_sep = '.', tag_suffix = ':')
 ```
