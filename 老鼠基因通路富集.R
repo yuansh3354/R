@@ -21,7 +21,7 @@ if(T){
   library(KEGG.db)
 }
 setwd("/Users/yuansh/Downloads")
-top = read.csv('CON_EDGER.csv',header = T)
+top = read.csv('OB_EDGER.csv',header = T)
 gene = top[,1]
 gene.df <- bitr(gene, fromType = "SYMBOL", #fromType是指你的数据ID类型是属于哪一类的
                 toType = c("ENTREZID", "SYMBOL"), #toType是指你要转换成哪种ID类型，可以写多种，也可以只写一种
@@ -80,3 +80,6 @@ if(T){
     ggsave(g_kegg,filename = 'kegg_up_down.png')
   }#kegg
 }
+write.csv(kegg_down_dt,'OB_EDGER_down.csv')
+write.csv(kegg_up_dt,'OB_EDGER_up.csv')
+write.csv(kegg_diff_dt,'OB_EDGER_diff.csv')
