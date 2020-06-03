@@ -1,3 +1,5 @@
+options(BioC_mirror="http://mirrors.tuna.tsinghua.edu.cn/bioconductor/")
+options("repos" = c(CRAN="http://mirrors.tuna.tsinghua.edu.cn/CRAN/"))
 if(T){
   library(limma)
   library(GEOquery)
@@ -16,8 +18,9 @@ if(T){
   library(survival)
   library(Hmisc)
   library(clusterProfiler)
+  library(KEGG.db)
 }
-
+setwd("/Users/yuansh/Downloads")
 top = read.csv('CON_EDGER.csv',header = T)
 gene = top[,1]
 gene.df <- bitr(gene, fromType = "SYMBOL", #fromType是指你的数据ID类型是属于哪一类的
@@ -42,7 +45,8 @@ if(T){
                         organism     = 'mmu',
                         universe     = gene_diff,
                         pvalueCutoff = 0.9,
-                        qvalueCutoff =0.9)
+                        qvalueCutoff =0.9,
+                        use_internal_data = T)
     head(kk.up)[,1:6]
     barplot(kk.up )
     ggsave('kk.up.barplot.png')
@@ -51,14 +55,16 @@ if(T){
                           organism     = 'mmu',
                           universe     = gene_diff,
                           pvalueCutoff = 0.9,
-                          qvalueCutoff =0.9)
+                          qvalueCutoff =0.9,
+                          use_internal_data = T)
     head(kk.down)[,1:6]
     barplot(kk.down )
     ggsave('kk.down.barplot.png')
     
     kk.diff <- enrichKEGG(gene         = gene_diff,
                           organism     = 'mmu',
-                          pvalueCutoff = 0.05)
+                          pvalueCutoff = 0.05,
+                          use_internal_data = T)
     head(kk.diff)[,1:6]
     barplot(kk.diff )
     ggsave('kk.diff.barplot.png')
