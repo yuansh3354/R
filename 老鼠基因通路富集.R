@@ -39,7 +39,7 @@ if(T){
 if(T){
   if(T){
     kk.up <- enrichKEGG(gene         = gene_up,
-                        organism     = 'hsa',
+                        organism     = 'mmu',
                         universe     = gene_diff,
                         pvalueCutoff = 0.9,
                         qvalueCutoff =0.9)
@@ -48,7 +48,7 @@ if(T){
     ggsave('kk.up.barplot.png')
     
     kk.down <- enrichKEGG(gene         =  gene_down,
-                          organism     = 'hsa',
+                          organism     = 'mmu',
                           universe     = gene_diff,
                           pvalueCutoff = 0.9,
                           qvalueCutoff =0.9)
@@ -57,7 +57,7 @@ if(T){
     ggsave('kk.down.barplot.png')
     
     kk.diff <- enrichKEGG(gene         = gene_diff,
-                          organism     = 'hsa',
+                          organism     = 'mmu',
                           pvalueCutoff = 0.05)
     head(kk.diff)[,1:6]
     barplot(kk.diff )
