@@ -38,6 +38,40 @@ if(T){
 
 ### 下载不需要归一化的数据
 
+|平台|注释包|
+|:---:|:---:|
+| GPL201  |  hgfocus|
+| GPL96   | hgu133a|
+| GPL571  |  hgu133a2|
+| GPL97   | hgu133b|
+| GPL570  |  hgu133plus2|
+| GPL13667|    hgu219|
+| GPL8300 |   hgu95av2|
+| GPL91   | hgu95av2|
+| GPL92   | hgu95b|
+| GPL93   | hgu95c|
+| GPL94   | hgu95d|
+| GPL95   | hgu95e|
+| GPL887  |  hgug4110b| 
+| GPL886  |  hgug4111a | 
+| GPL1708 |   hgug4112a |
+| GPL13497|    HsAgilentDesign026652 |
+| GPL6244 |   hugene10sttranscriptcluster |
+| GPL11532|    hugene11sttranscriptcluster |
+| GPL6097 |   illuminaHumanv1 |
+| GPL6102 |   illuminaHumanv2|
+| GPL6947 |   illuminaHumanv3 |
+| GPL10558|    illuminaHumanv4|
+| GPL6885 |   illuminaMousev2 |
+| GPL81   | mgu74av2 |
+| GPL82   | mgu74bv2 |
+| GPL83   | mgu74cv2 |
+| GPL339  |  moe430a|
+| GPL6246 |   mogene10sttranscriptcluster |
+| GPL340  |  mouse4302|
+| GPL1261 |   mouse430a2|
+| GPL8321 |   mouse430a2|
+
 ```R
 file = 'GSE19188' # 要下载的数据
 setwd('/Volumes/Lexar/ZG/GSE19188分析结果')
@@ -46,7 +80,7 @@ if(T){
                  AnnotGPL = F,     ## 注释文件
                  getGPL = F)
   a=gset[[1]]
-  tab <- select(hgu133plus2.db, keys = keys(hgu133plus2.db), columns = c("ENTREZID"))
+  tab <- select(hgu133plus2.db, keys = keys(hgu133plus2.db), columns = c("ENTREZID")) # 这里注意一下不同的平台信息要用不同的包
   e <- exprs(a)
   # 这时候把e打出来看一下是否需要进行归一化等等的处理
   geneExpr <- t(sapply(split(tab[,1], tab[,2]), function(ids){
