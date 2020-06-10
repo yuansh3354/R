@@ -89,40 +89,13 @@ if(T){
   }))
   geneExpr = na.omit(geneExpr)
   pd=pData(a) 
+  ### 根据需求决定是否需要归一化
+  #geneExpr=geneExpr[apply(geneExpr,1,sd)>0,]
+  #geneExpr=log2(geneExpr+1)
+  #geneExpr=normalizeBetweenArrays(geneExpr)
   # 1. 将样本信息导出
   write.csv(pd,file = paste(file,'_clinic.csv',sep = ''))
   write.csv(geneExpr,file = paste(file,'.csv',sep = ''))
-}
-paste(file,'_clinic.csv',sep = '')
-pd = read.csv(paste(file,'_clinic.csv',sep = ''),header = T, row.names = 1)
-df_expr = read.csv(paste(file,'.csv',sep = ''),header = T, row.names = 1)
-```
-
-### 如果需要归一化处理,则使用这个代码
-
-```R
-file = 'GSE31210' # GSE50081 GSE31210
-if(T){
-  gset <- getGEO(file, destdir=".",
-                 AnnotGPL = F,     ## 注释文件
-                 getGPL = F)
-  
-  a=gset[[1]]
-  tab <- select(hgu133plus2.db, keys = keys(hgu133plus2.db), columns = c("ENTREZID"))
-  e <- exprs(a)
-  e = na.omit(e)
-  geneExpr <- t(sapply(split(tab[,1], tab[,2]), function(ids){
-    colMeans(e[ids,,drop=FALSE])
-  }))
-  #gse31210需要归一化处理
-  geneExpr=geneExpr[apply(geneExpr,1,sd)>0,]
-  geneExpr=log2(geneExpr+1)
-  geneExpr=normalizeBetweenArrays(geneExpr)
-  pd=pData(a) 
-  #1. 将样本信息导出
-  write.csv(pd,file = paste(file,'_clinic.csv',sep = ''))
-  write.csv(geneExpr,file = paste(file,'.csv',sep = ''))
-  rm(a,gset)
 }
 paste(file,'_clinic.csv',sep = '')
 pd = read.csv(paste(file,'_clinic.csv',sep = ''),header = T, row.names = 1)
