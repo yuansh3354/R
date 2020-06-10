@@ -95,7 +95,7 @@ if(T){
   #geneExpr=normalizeBetweenArrays(geneExpr)
   # 1. 将样本信息导出
   write.csv(pd,file = paste(file,'_clinic.csv',sep = ''))
-  write.csv(geneExpr,file = paste(file,'.csv',sep = ''))
+  write.csv(geneExpr,file = paste(file,'_exp.csv',sep = ''))
 }
 paste(file,'_clinic.csv',sep = '')
 pd = read.csv(paste(file,'_clinic.csv',sep = ''),header = T, row.names = 1)
