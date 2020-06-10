@@ -87,6 +87,7 @@ if(T){
   geneExpr <- t(sapply(split(tab[,1], tab[,2]), function(ids){
     colMeans(e[ids,,drop=FALSE])
   }))
+  geneExpr = na.omit(geneExpr)
   pd=pData(a) 
   # 1. 将样本信息导出
   write.csv(pd,file = paste(file,'_clinic.csv',sep = ''))
