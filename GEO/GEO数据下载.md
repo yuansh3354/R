@@ -73,15 +73,16 @@ if(T){
 | GPL8321 |   mouse430a2|
 
 ```R
-file = 'GSE19188' # 要下载的数据
+file = 'GSEXXXXX' # 要下载的数据
 setwd('/Volumes/Lexar/ZG/GSE19188分析结果')
 if(T){
   gset <- getGEO(file, destdir=".",
                  AnnotGPL = F,     ## 注释文件
                  getGPL = F)
   a=gset[[1]]
-  tab <- select(hgu133plus2.db, keys = keys(hgu133plus2.db), columns = c("ENTREZID")) # 这里注意一下不同的平台信息要用不同的包
+  tab <- select(XXXXX.db, keys = keys(XXXXX.db), columns = c("ENTREZID")) # 这里注意一下不同的平台信息要用不同的包
   e <- exprs(a)
+  e = as.data.frame(e)
   # 这时候把e打出来看一下是否需要进行归一化等等的处理
   geneExpr <- t(sapply(split(tab[,1], tab[,2]), function(ids){
     colMeans(e[ids,,drop=FALSE])
@@ -90,7 +91,6 @@ if(T){
   # 1. 将样本信息导出
   write.csv(pd,file = paste(file,'_clinic.csv',sep = ''))
   write.csv(geneExpr,file = paste(file,'.csv',sep = ''))
-  rm(a,gset)
 }
 paste(file,'_clinic.csv',sep = '')
 pd = read.csv(paste(file,'_clinic.csv',sep = ''),header = T, row.names = 1)
