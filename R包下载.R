@@ -7,7 +7,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 options()$repos
 ##  先用这个
-install.packages('gdata')
+install.packages("geomnet", repos='https://mran.microsoft.com/snapshot/2019-02-01/')
 # 不行用这个
 BiocManager::install("KEGG.db",ask = F,update = F)
 #再不行最后用这个
