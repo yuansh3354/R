@@ -48,6 +48,7 @@ gset <- getGEO(file, destdir=".",
                
 a=gset[[1]]
 gpl='GPL3921'
+# tab=select(hthgu133a, keys = keys(hthgu133a), columns = c("SYMBOL"))
 tab=idmap(gpl,type = 'pipe') 
 e <- exprs(a)
 e = as.data.frame(e)
