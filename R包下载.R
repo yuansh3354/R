@@ -2,6 +2,14 @@
 # 除非代理不能用，不然不使用镜像下载
 # 这里有个问题注意一下，mac 上的终端下载数据还是 R 包速度都是相当的块，比 rstudio 快很多且稳定
 
+rm(list = ls())   
+options()$repos 
+options()$BioC_mirror
+options(BioC_mirror="https://mirrors.ustc.edu.cn/bioc/")
+options("repos" = c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/"))
+options()$repos 
+options()$BioC_mirror
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
