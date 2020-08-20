@@ -1,8 +1,3 @@
-| 左对齐 | 右对齐 | 居中对齐 |
-| :-----| ----: | :----: |
-| 单元格 | 单元格 | 单元格 |
-| 单元格 | 单元格 | 单元格 |
-
 |gpl |bioc_package|title|
 | :-----:| :----: | :----: |
 |GPL32	|mgu74a	|[MG_U74A] Affymetrix Murine Genome U74A Array|
